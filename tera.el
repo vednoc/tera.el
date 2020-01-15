@@ -51,7 +51,7 @@
 
 (defun tera-indenting-keywords ()
   (append
-   tera-closing-keywords
+   (tera-closing-keywords)
    '("else" "elif")))
 
 (defun tera-builtin-keywords ()
@@ -95,7 +95,7 @@
               (* whitespace)
               (? "-")
               "%}")) nil t)
-      (if (match-string 1) ;; end tag; continue
+      (if (match-string 1) ;; End tag, going on
           (let ((matches (tera-find-open-tag)))
             (if (string= (car matches) (match-string 2))
                 (tera-find-open-tag)
@@ -185,6 +185,11 @@
       (1 font-lock-keyword-face t)
       (2 font-lock-function-name-face t))
      (,(rx-to-string `(and word-start
+                           (? "end")
+                           ,(append '(or)
+                                    (tera-indenting-keywords))
+                           word-end)) (0 font-lock-keyword-face))
+     (,(rx-to-string `(and word-start
                            ,(append '(or)
                                     (tera-builtin-keywords))
                            word-end)) (0 font-lock-builtin-face))
@@ -205,18 +210,17 @@
 
 (defun sgml-indent-line-num ()
   "Indent the current line as SGML."
-  (let* ((savep (point)
-                (indent-col
-                 (save-excursion
-                   (back-to-indentation)
-                   (if (>= (point) savep) (setq savep nil))
-                   (sgml-calculate-indent))))
-         (if (null indent-col)
-             0
-           (if savep
-               (save-excursion indent-col)
-             indent-col))))
-  )
+  (let* ((savep (point))
+         (indent-col
+          (save-excursion
+            (back-to-indentation)
+            (if (>= (point) savep) (setq savep nil))
+            (sgml-calculate-indent))))
+    (if (null indent-col)
+        0
+      (if savep
+          (save-excursion indent-col)
+        indent-col))))
 
 (defun tera-calculate-indent-backward (default)
   "Return indent column based on previous lines"
