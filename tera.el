@@ -299,6 +299,7 @@
 (define-key tera-mode-map (kbd "C-c #") 'tera-insert-comment)
 
 ;;;###autoload
+(add-to-list 'auto-mode-alist '("/templates/[^/]+.html" . tera-mode))
 (add-to-list 'auto-mode-alist '("\\.tera\\'" . tera-mode))
 
 (provide 'tera-mode)
