@@ -269,6 +269,10 @@
           (goto-char (+ (- indent old_indent) old_point)))
       indent)))
 
+(defun tera-indent-buffer ()
+  (interactive)
+  (save-excursion
+    (indent-region (point-min) (point-max))))
 
 ;;;###autoload
 (define-derived-mode tera-mode html-mode "Tera"
@@ -301,6 +305,7 @@
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("/templates/[^/]+.html" . tera-mode))
 (add-to-list 'auto-mode-alist '("\\.tera\\'" . tera-mode))
+(add-hook 'before-save-hook 'tera-indent-buffer)
 
 (provide 'tera-mode)
 
