@@ -1,4 +1,4 @@
 #+TITLE:   tera.el
 #+DATE:    January 14, 2020
 
-Major mode for using [[https://tera.netlify.com/][tera template engine]].
+Major mode for [[https://tera.netlify.com/][tera template engine]]. Can be used standalaone or with [[https://getzola.org][Zola]].
