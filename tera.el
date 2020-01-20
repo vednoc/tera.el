@@ -20,8 +20,9 @@
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; Entirety of the code is taken from jinja2-mode since tera templating
-;; engine uses the same syntax with a few small differences. Kudos to
+
+;; Entirety of the code is taken from `jinja2-mode' since tera templating
+;; engine uses very similar syntax with a few differences. Kudos to
 ;; `paradoxxxzero' and `jinja2-mode' contributors.
 ;; The project origin: <https://github.com/paradoxxxzero/jinja2-mode>
 
@@ -287,8 +288,7 @@
   (set (make-local-variable 'comment-end-skip) "#}")
   ;; it mainly from sgml-mode font lock setting
   (set (make-local-variable 'font-lock-defaults)
-       '((
-          tera-font-lock-keywords
+       '((tera-font-lock-keywords
           tera-font-lock-keywords-1
           tera-font-lock-keywords-2
           tera-font-lock-keywords-3)
