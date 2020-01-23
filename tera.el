@@ -271,9 +271,11 @@
       indent)))
 
 (defun tera-indent-buffer ()
+  "Indent the entire buffer."
   (interactive)
-  (save-excursion
-    (indent-region (point-min) (point-max))))
+  (when (eq major-mode 'tera-mode)
+    (save-excursion
+      (indent-region (point-min) (point-max)))))
 
 ;;;###autoload
 (define-derived-mode tera-mode html-mode "Tera"
@@ -305,7 +307,7 @@
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("/templates/[^/]+.html" . tera-mode))
 (add-to-list 'auto-mode-alist '("\\.tera\\'" . tera-mode))
-(add-hook 'before-save-hook 'tera-indent-buffer)
+(add-hook 'before-save-hook #'tera-indent-buffer)
 
 (provide 'tera-mode)
 
