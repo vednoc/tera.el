@@ -1,4 +1,4 @@
-;;; tera.el --- Major mode for tera templating engine
+;;; tera.el --- Major mode for Tera templating engine
 
 ;; Copyright (c) 2011-2014 paradoxxxzero
 ;; Copyright (c) 2020 vednoc
@@ -21,17 +21,17 @@
 
 ;;; Commentary:
 
-;; Entirety of the code is taken from `jinja2-mode' since tera templating
+;; Entirety of the code is taken from `jinja2-mode' since Tera templating
 ;; engine uses very similar syntax with a few differences. Kudos to
-;; `paradoxxxzero' and `jinja2-mode' contributors.
-;; The project origin: <https://github.com/paradoxxxzero/jinja2-mode>
+;; `paradoxxxzero' and `jinja2-mode' contributors for their work.
+;; Forked from: <https://github.com/paradoxxxzero/jinja2-mode>
 
 ;;; Code:
 
 (require 'sgml-mode)
 
 (defgroup tera nil
-  "Major mode for editing tera files."
+  "Major mode for editing Tera files."
   :prefix "tera-"
   :group 'languages)
 
@@ -105,7 +105,7 @@
     nil))
 
 (defun tera-close-tag ()
-  "Close the previously opened templated tag."
+  "Close the previously opened template tag."
   (interactive)
   (let ((open-tag (save-excursion (tera-find-open-tag))))
     (if open-tag
@@ -260,7 +260,7 @@
             (tera-calculate-indent-backward default)))))))
 
 (defun tera-indent-line ()
-  "Indent current line as Jinja code"
+  "Indent the current line."
   (interactive)
   (let ((old_indent (current-indentation)) (old_point (point)))
     (move-beginning-of-line nil)
@@ -279,7 +279,7 @@
 
 ;;;###autoload
 (define-derived-mode tera-mode html-mode "Tera"
-  "Major mode for editing tera files"
+  "Major mode for editing Tera files."
   :group 'tera
   ;; Disabling this because of this emacs bug:
   ;; http://lists.gnu.org/archive/html/bug-gnu-emacs/2002-09/msg00041.html
@@ -309,6 +309,5 @@
 (add-to-list 'auto-mode-alist '("\\.tera\\'" . tera-mode))
 (add-hook 'before-save-hook #'tera-indent-buffer)
 
-(provide 'tera-mode)
-
-;;; tera-mode.el ends here
+(provide 'tera)
+;;; tera.el ends here
