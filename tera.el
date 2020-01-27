@@ -57,7 +57,7 @@
 
 (defun tera-builtin-keywords ()
   '(
-    "get_url" "elif" "loop" "last" "super" "none"
+    "get_url" "loop" "last" "super" "none"
     "and" "or" "not" "in" "as" "include"
     "set" "set_global" "break" "continue"
     "true" "false" "import" "extends" "from"))
