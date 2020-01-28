@@ -46,16 +46,19 @@
   :group 'tera)
 
 (defun tera-closing-keywords ()
+  "Tera closing keywords."
   (append
    tera-user-keywords
    '("if" "for" "block" "filter" "raw" "macro")))
 
 (defun tera-indenting-keywords ()
+  "Tera indenting keywords."
   (append
    (tera-closing-keywords)
    '("else" "elif")))
 
 (defun tera-builtin-keywords ()
+  "Tera builtin keywords."
   '(
     "get_url" "loop" "last" "super" "none"
     "and" "or" "not" "in" "as" "include"
@@ -63,6 +66,7 @@
     "true" "false" "import" "extends" "from"))
 
 (defun tera-function-keywords ()
+  "Tera function keywords."
   (append
    tera-user-keywords
    '("lower" "upper" "capitalize" "slugify"
@@ -82,6 +86,7 @@
      )))
 
 (defun tera-find-open-tag ()
+  "Open a template tag."
   (if (search-backward-regexp
        (rx-to-string
         `(and "{%"
@@ -224,7 +229,7 @@
         indent-col))))
 
 (defun tera-calculate-indent-backward (default)
-  "Return indent column based on previous lines"
+  "Return DEFAULT indent column based on previous lines."
   (let ((indent-width sgml-basic-offset) (default (sgml-indent-line-num)))
     (forward-line -1)
     (if (looking-at "^[ \t]*{%-? *end") ; Don't indent after end
@@ -239,9 +244,8 @@
                 0
               (tera-calculate-indent-backward default))))))))
 
-
 (defun tera-calculate-indent ()
-  "Return indent column"
+  "Return indent column."
   (if (bobp)  ; Check beginning of buffer
       0
     (let ((indent-width sgml-basic-offset) (default (sgml-indent-line-num)))
